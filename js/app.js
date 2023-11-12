@@ -1,7 +1,11 @@
-import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
+import { kaboom } from "./kaboom.js";
+import { spawnTree } from "./utils.js";
 
 // Game
-kaboom();
+kaboom({
+    background: [0,0,0],
+    scale: 2,
+});
 // Sprites
 loadSprite("bean", "sprites/bean.png");
 // CONSTANTS
@@ -11,13 +15,15 @@ let score = 0;
 
 // Game Scene
 scene("game", () => {
-
+    spawnTree();
     setGravity(1600);
+
+    //#region Components
 
     const scoreLabel = add([
         text(score),
         pos(24, 24)
-    ])
+    ]);
 
     // add something to screen
     const bean = add([
@@ -38,25 +44,10 @@ scene("game", () => {
         body({ isStatic: true }), // body can't move
         color(127, 200, 255),
     ]);
-    
-    function spawnTree() {
-        // add tree
-        add([
-            rect(48, rand(24, 80)),
-            area(),
-            outline(4),
-            pos(width(), height() - 48),
-            anchor("botleft"),
-            color(255, 180, 255),
-            move(LEFT, 240),
-            "tree", // add a tag here
-        ]);
-        wait(rand(1.5, 2.5), () => {
-            spawnTree();
-        });
-    }
-    
-    spawnTree();
+
+    //#endregion
+
+    //#region Events
 
     onKeyPress("space", () => {
         if(!bean.isGrounded()) return;
@@ -74,6 +65,9 @@ scene("game", () => {
         score++;
         scoreLabel.text = score;
     });
+
+    //#endregion
+
 });
 
 // Lose Scene
