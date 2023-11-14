@@ -7,6 +7,7 @@ let score = 0;
 function loadGameScene(){
     // Game Scene
     scene("game", () => {
+        score = 0;
         spawnTree();
         setGravity(1600);
 

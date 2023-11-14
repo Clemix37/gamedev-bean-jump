@@ -12,4 +12,4 @@ loadBean();
 loadScenes(); // We load every scene
 
 // We launch on game scene
-go("game");
+go("menu");
