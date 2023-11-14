@@ -1,5 +1,5 @@
 function loadMenuScene(){
-    // Lose Scene
+    // Menu Scene
     scene("menu", () => {
         const btnPlay = add([
             rect(240, 80, { radius: 8 }),
